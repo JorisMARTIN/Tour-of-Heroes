@@ -11,7 +11,6 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
-import {NgbdToastGlobal} from './components/toast-global/toast-global.component';
 import {ToastsContainer} from "./components/toast-global/toast-container.component";
 
 @NgModule({
@@ -20,7 +19,7 @@ import {ToastsContainer} from "./components/toast-global/toast-container.compone
 		HeroesComponent,
 		HeroDetailComponent,
 		DashboardComponent,
-		NgbdToastGlobal, ToastsContainer
+		ToastsContainer
 	],
 	imports: [
 		BrowserModule,
