@@ -8,18 +8,19 @@ import {HeroesComponent} from './components/heroes/heroes.component';
 import {FormsModule} from "@angular/forms";
 import {HeroDetailComponent} from './components/hero-detail/hero-detail.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {environment} from '../environments/environment';
-import {provideFirestore, getFirestore} from '@angular/fire/firestore';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {NgbdToastGlobal} from './components/toast-global/toast-global.component';
+import {ToastsContainer} from "./components/toast-global/toast-container.component";
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HeroesComponent,
 		HeroDetailComponent,
-		DashboardComponent
+		DashboardComponent,
+		NgbdToastGlobal, ToastsContainer
 	],
 	imports: [
 		BrowserModule,

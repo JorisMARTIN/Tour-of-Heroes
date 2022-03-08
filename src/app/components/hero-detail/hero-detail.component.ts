@@ -3,6 +3,7 @@ import {Location} from '@angular/common';
 import {Hero} from '../../interfaces/hero';
 import {ActivatedRoute} from "@angular/router";
 import {HeroService} from "../../services/hero.service";
+import {ToastService} from "../../services/toast.service";
 
 @Component({
 	selector: 'app-hero-detail',
