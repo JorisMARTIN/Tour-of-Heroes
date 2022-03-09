@@ -3,7 +3,6 @@ import {Location} from '@angular/common';
 import {Hero} from '../../interfaces/hero';
 import {ActivatedRoute} from "@angular/router";
 import {HeroService} from "../../services/hero.service";
-import {ToastService} from "../../services/toast.service";
 
 @Component({
 	selector: 'app-hero-detail',
@@ -11,6 +10,10 @@ import {ToastService} from "../../services/toast.service";
 	styleUrls: ['./hero-detail.component.scss']
 })
 export class HeroDetailComponent implements OnInit {
+
+	GLOBAL_POINT: number = 40;
+
+	hero?: Hero;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -22,7 +25,6 @@ export class HeroDetailComponent implements OnInit {
 		this.getHero();
 	}
 
-	@Input() hero?: Hero;
 
 	getHero(): void {
 		const id = this.route.snapshot.paramMap.get('id');
@@ -38,5 +40,40 @@ export class HeroDetailComponent implements OnInit {
 
 	save() {
 		if (this.hero) this.heroService.update(this.hero);
+	}
+
+
+	/**
+	 * Called to control the value of each abilities according to the available points
+	 *
+	 * @param e Input change event
+	 */
+	onStatChange(e: Event) {
+		const target = e.target as HTMLInputElement;
+		if (this.hero) {
+			const availablePoint = this.computeAvailablePoint(this.hero);
+			if (this.hero[target.name] < target.value && availablePoint == 0) {
+				target.value = this.hero[target.name];
+			} else {
+				const value = Number.parseInt(target.value);
+				if (availablePoint - (value - this.hero[target.name]) < 0) this.hero[target.name] += availablePoint;
+				else this.hero[target.name] = value;
+			}
+		}
+	}
+
+	balancePoints(): void {
+		if (this.hero) {
+			const value = this.GLOBAL_POINT / 4;
+			this.hero.pv = this.hero.attack = this.hero.power = this.hero.dodge = value;
+		}
+	}
+
+	/**
+	 *
+	 * @param hero Hero to compute available point
+	 */
+	computeAvailablePoint(hero: Hero): number {
+		return this.GLOBAL_POINT - (hero.attack + hero.power + hero.pv + hero.dodge);
 	}
 }

@@ -22,7 +22,7 @@ export class HeroService {
 	}
 
 	get(id: string): Observable<Hero> {
-		return this.heroesRef.doc(id).valueChanges({ idField: 'id' });
+		return this.heroesRef.doc(id).valueChanges({idField: 'id'});
 	}
 
 	getAll(): Observable<Hero[]> {

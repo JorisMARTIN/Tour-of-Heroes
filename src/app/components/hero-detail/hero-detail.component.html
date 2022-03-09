@@ -1,9 +1,8 @@
 <div *ngIf="hero">
 
-	<h2>{{hero.name | uppercase}} Details</h2>
+	<h2><b>Hero :</b> {{hero.name | uppercase}}</h2>
 
-	<form>
-
+	<div class="container col-md-6 col-xs-12 justify-content-center">
 		<div class="mb-3 row">
 			<label class="col-sm-2 col-form-label" for="hero-id">Id :</label>
 			<div class="col-sm-10">
@@ -11,19 +10,72 @@
 			</div>
 		</div>
 
-		<div class="mb-3 row">
-			<label class="col-sm-2 col-form-label" for="hero-name">Nom : </label>
+		<div class="mb-4 row">
+			<label class="col-sm-2 col-form-label" for="hero-name">Nom</label>
 			<div class="col-sm-10">
 				<input id="hero-name" class="form-control" type="text" name="name" [(ngModel)]="hero.name">
 			</div>
 		</div>
-	</form>
 
+		<div class="mb-3">
+			<h3>Caractéristiques</h3>
+			<div class="row mb-3 p-4">
+				<div class="col-sm-12 col-md-10">
+					<!-- PV -->
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label" for="hero-pv">PV</label>
+						<div class="col-sm-8">
+							<input id="hero-pv" type="range" class="form-range" name="pv" min="1" max="{{GLOBAL_POINT - 3}}" step="1" value="{{hero.pv}}" (change)="onStatChange($event)">
+						</div>
+						<span class="col-sm-2">{{hero.pv}}</span>
+					</div>
 
-	<div class="btn-group" role="group" aria-label="Basic example">
-		<button type="button" class="btn btn-danger" (click)="goBack()">Retour</button>
-		<button type="button" class="btn btn-success" (click)="save()">Sauvegarder</button>
+					<!-- Attack -->
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label" for="hero-attack">Attaque</label>
+						<div class="col-sm-8">
+							<input id="hero-attack" type="range" class="form-range" name="attack" min="1" max="{{GLOBAL_POINT - 3}}" step="1" value="{{hero.attack}}" (change)="onStatChange($event)">
+						</div>
+						<span class="col-sm-2">{{hero.attack}}</span>
+					</div>
+
+					<!-- Dodge -->
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label" for="hero-dodge">Esquive</label>
+						<div class="col-sm-8">
+							<input id="hero-dodge" type="range" class="form-range" name="dodge" min="1" max="{{GLOBAL_POINT - 3}}" step="1" value="{{hero.dodge}}" (change)="onStatChange($event)">
+						</div>
+						<span class="col-sm-2">{{hero.dodge}}</span>
+					</div>
+
+					<!-- Power -->
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label" for="hero-power">Puissance</label>
+						<div class="col-sm-8">
+							<input id="hero-power" type="range" class="form-range" name="power" min="1" max="{{GLOBAL_POINT - 3}}" step="1" value="{{hero.power}}" (change)="onStatChange($event)">
+						</div>
+						<span class="col-sm-2">{{hero.power}}</span>
+					</div>
+
+				</div>
+				<div class="col-sm-12 col-md-2 text-center">
+					<div class="row">
+						<h4>Points disponibles <span class="badge {{computeAvailablePoint(hero) == 0 ? 'bg-danger' : 'bg-primary'}}">{{computeAvailablePoint(hero)}}</span></h4>
+					</div>
+					<div class="row">
+						<button class="btn btn-info" (click)="balancePoints()">Équilibrer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row justify-content-center" role="group" aria-label="Basic example">
+			<button type="button" class="col-2 btn btn-danger" (click)="goBack()">Retour</button>
+			<button type="button" class="col-2 btn btn-success" (click)="save()">Sauvegarder</button>
+		</div>
 	</div>
+
+
 
 
 </div>
