@@ -12,6 +12,8 @@ import {environment} from '../environments/environment';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {ToastsContainer} from "./components/toast-global/toast-container.component";
+import {WeaponsComponent} from './components/weapons/weapons.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
 	declarations: [
@@ -19,7 +21,9 @@ import {ToastsContainer} from "./components/toast-global/toast-container.compone
 		HeroesComponent,
 		HeroDetailComponent,
 		DashboardComponent,
-		ToastsContainer
+		ToastsContainer,
+		WeaponsComponent,
+  		NavbarComponent
 	],
 	imports: [
 		BrowserModule,
@@ -32,7 +36,8 @@ import {ToastsContainer} from "./components/toast-global/toast-container.compone
 		AngularFirestoreModule
 	],
 	providers: [],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	exports: []
 })
 export class AppModule {
 }

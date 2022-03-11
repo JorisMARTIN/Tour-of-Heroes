@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../../interfaces/hero';
+import { IHero } from '../../interfaces/hero.interface';
 import { HeroService } from '../../services/hero.service';
 
 
@@ -12,7 +12,7 @@ import { HeroService } from '../../services/hero.service';
 export class DashboardComponent implements OnInit {
 
   TOP_HEROES_NUMBER: number = 5;
-  heroes: Hero[] = [];
+  heroes: IHero[] = [];
 
   constructor(private heroService: HeroService) { }
 
