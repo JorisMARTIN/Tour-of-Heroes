@@ -12,41 +12,92 @@ const COLLECTION_NAME = 'Heroes';
 export class HeroService {
 	private toastService: ToastService;
 
+	// La collection firestore des héros
 	private heroesRef: AngularFirestoreCollection<any>;
+	// L'ensemble des héros
 	heroes$: Observable<any[]>;
 
-	constructor(firestore: AngularFirestore, toastService: ToastService) {
+	// Initialisation de la collection et récupération de l'ensemble des héros
+	constructor(private readonly afs: AngularFirestore, toastService: ToastService) {
 		this.toastService = toastService;
-		this.heroesRef = firestore.collection(COLLECTION_NAME);
-		this.heroes$ = firestore.collection(COLLECTION_NAME).valueChanges({ idField: 'id' });
+		this.heroesRef = afs.collection(COLLECTION_NAME);
+		this.heroes$ = afs.collection(COLLECTION_NAME).valueChanges({ idField: 'id' });
 	}
 
+	/**
+	 * Récupère un héro de la base de donnée
+	 * @param id L'id du héro à récupérer
+	 */
 	get(id: string): Observable<Hero> {
 		return this.heroesRef.doc(id).valueChanges({idField: 'id'});
 	}
 
+	/**
+	 * Récupère l'ensemble des héros de la base de donnée
+	 */
 	getAll(): Observable<Hero[]> {
 		return this.heroes$;
 	}
 
-	create(hero: Hero){
-		this.heroesRef.add({ ...hero });
+	/**
+	 * Créer un nouvel héro dans la base de donnée
+	 * @param hero Le héro à créer
+	 * @return string|null L'id du nouvel héro ou null si une erreur survient
+	 */
+	async create(hero: Hero): Promise<string | null> {
+		const id = this.afs.createId();
+		try {
+			// await this.heroesRef.add({ ...hero });
+			await this.heroesRef.doc(id).set(hero);
+			this.toastService.showSuccess({
+				text: "Succès",
+				detail: "Votre héro a été créé avec succès !"
+			});
+			return id;
+		} catch (err) {
+			this.toastService.showDanger({
+				text: "Erreur",
+				detail: "Une erreur est survenue lors de la création de votre héro !\nErreur : " + err
+			});
+			return null;
+		}
 	}
 
+	/**
+	 * Modifie un héro existant et le met à jour en base de donnée.
+	 * @param hero Le héro modifié à mettre à jour
+	 */
 	async update(hero: Hero): Promise<void>{
 		try {
 			await this.heroesRef.doc(hero.id).update(hero);
 			this.toastService.showSuccess({
-				text: "Sauvegarde effectuée !"
+				text: "Succès",
+				detail: "Votre héro a été sauvegardé avec succès !"
 			});
 		} catch (err) {
 			this.toastService.showDanger({
-				text: "Sauvegarde effectuée !"
+				text: "Erreur",
+				detail: "Une erreur est survenue lors de la sauvegarde de votre héro !\nErreur : " + err
 			});
 		}
 	}
 
-	delete(hero: Hero){
-		this.heroesRef.doc(hero.id).delete();
+	/**
+	 * Supprime un héro de la base de donnée
+	 * @param hero Le héro à supprimer
+	 */
+	async delete(hero: Hero): Promise<void> {
+		try {
+			await this.heroesRef.doc(hero.id).delete();
+			this.toastService.showSuccess({
+				text: "Succès",
+				detail: "Votre héro a été supprimé avec succès !"
+			});
+		} catch (err) {
+			this.toastService.showDanger({
+				text: "Erreur",
+				detail: "Une erreur est survenue lors de la suppression de votre héro !\nErreur : " + err
+			});
+		}
 	}
 }

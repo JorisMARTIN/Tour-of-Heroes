@@ -1,19 +1,21 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {Hero} from '../../interfaces/hero';
 import {ActivatedRoute} from "@angular/router";
 import {HeroService} from "../../services/hero.service";
+import {Subscription} from "rxjs";
 
 @Component({
 	selector: 'app-hero-detail',
 	templateUrl: './hero-detail.component.html',
 	styleUrls: ['./hero-detail.component.scss']
 })
-export class HeroDetailComponent implements OnInit {
+export class HeroDetailComponent implements OnInit, OnDestroy {
 
 	GLOBAL_POINT: number = 40;
-
 	hero?: Hero;
+
+	private sub: Subscription | undefined;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -25,11 +27,14 @@ export class HeroDetailComponent implements OnInit {
 		this.getHero();
 	}
 
+	ngOnDestroy() {
+		if (this.sub) this.sub.unsubscribe();
+	}
 
 	getHero(): void {
 		const id = this.route.snapshot.paramMap.get('id');
 		if (id) {
-			this.heroService.get(id)
+			this.sub = this.heroService.get(id)
 				.subscribe(hero => this.hero = hero);
 		}
 	}
@@ -76,4 +81,5 @@ export class HeroDetailComponent implements OnInit {
 	computeAvailablePoint(hero: Hero): number {
 		return this.GLOBAL_POINT - (hero.attack + hero.power + hero.pv + hero.dodge);
 	}
+
 }

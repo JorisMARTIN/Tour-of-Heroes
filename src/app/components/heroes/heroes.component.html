@@ -1,13 +1,43 @@
-<h2>My Heroes</h2>
-<div class="list-group">
-	<a *ngFor="let hero of heroes | async"
-	   id="hero-component-{{hero.id}}"
-	   routerLink="/detail/{{hero.id}}"
-	   class="list-group-item list-group-item-action"
-	   (mouseenter)="setActive(hero.id, true)"
-	   (mouseleave)="setActive(hero.id, false)"
-	>
-		<span class="badge bg-primary">{{hero.id}}</span> {{hero.name}}
-	</a>
+<div class="container-fluid col-xs-12 col-md-6 m-auto">
+	<h2 class="text-center">Héros</h2>
+	<div class="row">
+		<button type="button" class="mb-2 col-xs-12 col-md-4 btn btn-outline-success" (click)="open(heroModalTemplate)">Créer un héro</button>
+	</div>
+	<div class="row">
+		<ul class="list-group">
+			<li *ngFor="let hero of heroes$ | async"
+				id="hero-component-{{hero.id}}"
+				class="list-group-item"
+				(mouseenter)="setActive(hero.id, true)"
+				(mouseleave)="setActive(hero.id, false)"
+			>
+				<span>{{hero.name}}</span>
+				<div class="float-end btn-group" role="group" aria-label="Basic example">
+					<a class="btn btn-success" routerLink="/hero/{{hero.id}}" title="Éditer le héro">
+						<i class="bi bi-pencil"></i>
+					</a>
+					<button type="button" class="btn btn-danger" title="Supprimer le héro" (click)="deleteHero(hero)">
+						<i class="bi bi-trash"></i>
+					</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<!-- Hero Modal -->
+	<ng-template #heroModalTemplate let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+		</div>
+		<div class="modal-body">
+			<label for="newHero-name" class="form-label">Nom du héro</label>
+			<input id="newHero-name" type="text" class="form-control" [(ngModel)]="newHeroName" required>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-danger" (click)="modal.close()">Annuler</button>
+			<button type="button" class="btn btn-outline-success" (click)="modal.close('save')">Sauvegarder</button>
+		</div>
+	</ng-template>
 </div>
 
