@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
-import {Toast} from "../interfaces/toast";
+import {IToast} from "../interfaces/toast.interface";
 
 const STANDART_DELAY = 5000;
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
-	private toasts: Toast[] = [];
+	private toasts: IToast[] = [];
 
-	show(toast: Toast) {
+	show(toast: IToast) {
 		toast.delay = toast.delay || STANDART_DELAY;
 		this.toasts.push(toast);
 	}
 
-	remove(toast: Toast) {
+	remove(toast: IToast) {
 		this.toasts = this.toasts.filter(t => t !== toast);
 	}
 
-	showStandard(toast: Toast) {
+	showStandard(toast: IToast) {
 		this.show(toast);
 	}
 
-	showSuccess(toast: Toast) {
+	showSuccess(toast: IToast) {
 		toast.classname = "bg-success";
 		this.show(toast);
 	}
 
-	showDanger(toast: Toast) {
+	showDanger(toast: IToast) {
 		toast.classname = "bg-danger";
 		this.show(toast);
 	}
 
-	getToasts(): Toast[] {
+	getToasts(): IToast[] {
 		return this.toasts;
 	}
 }

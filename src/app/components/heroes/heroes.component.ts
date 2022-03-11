@@ -1,5 +1,5 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
-import {Hero} from "../../interfaces/hero";
+import {IHero} from "../../interfaces/hero.interface";
 import {HeroService} from "../../services/hero.service";
 import {Observable, of} from "rxjs";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class HeroesComponent implements OnInit {
 
-	heroes$: Observable<Hero[]> = of([]);
+	heroes$: Observable<IHero[]> = of([]);
 
 	newHeroName: string = "";
 
@@ -27,7 +27,7 @@ export class HeroesComponent implements OnInit {
 		this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
 			if (result === 'save') {
 				// Création du héro
-				const newHero: Hero = {
+				const newHero: IHero = {
 					name: this.newHeroName,
 					dodge: 10,
 					pv: 10,
@@ -64,7 +64,7 @@ export class HeroesComponent implements OnInit {
 		}
 	}
 
-	deleteHero(hero: Hero) {
+	deleteHero(hero: IHero) {
 		this.heroService.delete(hero);
 	}
 }

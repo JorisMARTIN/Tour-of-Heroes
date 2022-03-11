@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {Hero} from '../../interfaces/hero';
+import {IHero} from '../../interfaces/hero.interface';
 import {ActivatedRoute} from "@angular/router";
 import {HeroService} from "../../services/hero.service";
 import {Subscription} from "rxjs";
@@ -13,7 +13,7 @@ import {Subscription} from "rxjs";
 export class HeroDetailComponent implements OnInit, OnDestroy {
 
 	GLOBAL_POINT: number = 40;
-	hero?: Hero;
+	hero?: IHero;
 
 	private sub: Subscription | undefined;
 
@@ -76,9 +76,9 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 
 	/**
 	 *
-	 * @param hero Hero to compute available point
+	 * @param hero HeroInterface to compute available point
 	 */
-	computeAvailablePoint(hero: Hero): number {
+	computeAvailablePoint(hero: IHero): number {
 		return this.GLOBAL_POINT - (hero.attack + hero.power + hero.pv + hero.dodge);
 	}
 

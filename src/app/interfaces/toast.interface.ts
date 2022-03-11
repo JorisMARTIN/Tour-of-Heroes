@@ -1,4 +1,4 @@
-export interface Toast {
+export interface IToast {
 	text: string,
 	detail?: string,
 	classname?: string,
