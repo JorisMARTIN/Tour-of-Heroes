@@ -2,8 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {IHero} from '../../interfaces/hero.interface';
 import {ActivatedRoute} from "@angular/router";
-import {HeroService} from "../../services/hero.service";
+import {HeroService} from "../../services/entity/hero.service";
 import {Subscription} from "rxjs";
+import {ISkills} from "../../interfaces/skills.interface";
 
 @Component({
 	selector: 'app-hero-detail',
@@ -13,7 +14,8 @@ import {Subscription} from "rxjs";
 export class HeroDetailComponent implements OnInit, OnDestroy {
 
 	GLOBAL_POINT: number = 40;
-	hero?: IHero;
+	hero: IHero;
+	skills: ISkills;
 
 	private sub: Subscription | undefined;
 
@@ -25,6 +27,7 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.getHero();
+
 	}
 
 	ngOnDestroy() {
@@ -35,7 +38,15 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 		const id = this.route.snapshot.paramMap.get('id');
 		if (id) {
 			this.sub = this.heroService.get(id)
-				.subscribe(hero => this.hero = hero);
+				.subscribe(hero => {
+					this.hero = hero;
+					this.skills = {
+						pv: hero.pv,
+						power: hero.power,
+						dodge: hero.dodge,
+						attack: hero.attack
+					}
+				});
 		}
 	}
 

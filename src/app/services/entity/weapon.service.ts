@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {FirestoreService} from "./firestore.service";
-import {IWeapon} from "../interfaces/weapon.interface";
+import {FirestoreService} from "../firestore.service";
+import {IWeapon} from "../../interfaces/weapon.interface";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {ToastService} from "./toast.service";
+import {ToastService} from "../toast.service";
 
 const COLLECTION_NAME = 'Weapons';
 

@@ -1,9 +1,6 @@
-export interface IWeapon {
+import {ISkills} from "./skills.interface";
+
+export interface IWeapon extends ISkills{
 	id: string,
-	name: string,
-	pv: number,
-	attack: number,
-	dodge: number,
-	power: number,
-	[field: string]: any
+	name: string
 }

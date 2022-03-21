@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {IHero} from "../../interfaces/hero.interface";
-import {HeroService} from "../../services/hero.service";
+import {HeroService} from "../../services/entity/hero.service";
 import {Observable, of} from "rxjs";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";

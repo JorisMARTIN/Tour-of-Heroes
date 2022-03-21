@@ -1,9 +1,7 @@
-export interface IHero {
+import {ISkills} from "./skills.interface";
+
+export interface IHero extends ISkills{
 	id: string,
-	name: string,
-	attack: number,
-	dodge: number,
-	power: number,
-	pv: number,
+	name: string
 	[field: string]: any
 }

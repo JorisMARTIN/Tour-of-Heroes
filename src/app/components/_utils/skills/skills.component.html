@@ -1,0 +1,48 @@
+<div class="row mb-3 p-4">
+	<div class="col-md-12 col-lg-10">
+		<!-- PV -->
+		<div class="row mb-3">
+			<label class="col-md-12 col-lg-2 col-form-label" for="hero-pv">PV</label>
+			<div class="col-md-12 col-lg-8">
+				<input id="hero-pv" type="range" class="form-range" name="pv" min="{{minValue}}" max="{{maxValue}}" step="1" value="{{skills.pv}}" (change)="onStatChange($event)">
+			</div>
+			<span class="col-md-12 col-lg-2">{{skills.pv}}</span>
+		</div>
+
+		<!-- Attack -->
+		<div class="row mb-3">
+			<label class="col-md-12 col-lg-2 col-form-label" for="hero-attack">Attaque</label>
+			<div class="col-md-12 col-lg-8">
+				<input id="hero-attack" type="range" class="form-range" name="attack" min="{{minValue}}" max="{{maxValue}}" step="1" value="{{skills.attack}}" (change)="onStatChange($event)">
+			</div>
+			<span class="col-md-12 col-lg-2">{{skills.attack}}</span>
+		</div>
+
+		<!-- Dodge -->
+		<div class="row mb-3">
+			<label class="col-md-12 col-lg-2 col-form-label" for="hero-dodge">Esquive</label>
+			<div class="col-md-12 col-lg-8">
+				<input id="hero-dodge" type="range" class="form-range" name="dodge" min="{{minValue}}" max="{{maxValue}}" step="1" value="{{skills.dodge}}" (change)="onStatChange($event)">
+			</div>
+			<span class="col-md-12 col-lg-2">{{skills.dodge}}</span>
+		</div>
+
+		<!-- Power -->
+		<div class="row mb-3">
+			<label class="col-md-12 col-lg-2 col-form-label" for="hero-power">Puissance</label>
+			<div class="col-md-12 col-lg-8">
+				<input id="hero-power" type="range" class="form-range" name="power" min="{{minValue}}" max="{{maxValue}}" step="1" value="{{skills.power}}" (change)="onStatChange($event)">
+			</div>
+			<span class="col-md-12 col-lg-2">{{skills.power}}</span>
+		</div>
+
+	</div>
+	<div class="col-md-12 col-lg-2 text-center">
+		<div class="row">
+			<h4>Points disponibles <span class="badge {{computeAvailablePoint(skills) == 0 ? 'bg-danger' : 'bg-primary'}}">{{computeAvailablePoint(skills)}}</span></h4>
+		</div>
+		<div class="row">
+			<button class="btn btn-info" (click)="balancePoints()">Équilibrer</button>
+		</div>
+	</div>
+</div>

@@ -1,6 +1,6 @@
 <div *ngIf="hero">
 
-	<h2><b>HeroInterface :</b> {{hero.name | uppercase}}</h2>
+	<h2><b>Héro :</b> {{hero.name | uppercase}}</h2>
 
 	<div class="container col-md-6 col-xs-12 justify-content-center">
 		<div class="mb-3 row">
@@ -19,9 +19,9 @@
 
 		<div class="mb-3">
 			<h3>Caractéristiques</h3>
-			<div class="row mb-3 p-4">
+			<!--<div class="row mb-3 p-4">
 				<div class="col-md-12 col-lg-10">
-					<!-- PV -->
+					&lt;!&ndash; PV &ndash;&gt;
 					<div class="row mb-3">
 						<label class="col-md-12 col-lg-2 col-form-label" for="hero-pv">PV</label>
 						<div class="col-md-12 col-lg-8">
@@ -30,7 +30,7 @@
 						<span class="col-md-12 col-lg-2">{{hero.pv}}</span>
 					</div>
 
-					<!-- Attack -->
+					&lt;!&ndash; Attack &ndash;&gt;
 					<div class="row mb-3">
 						<label class="col-md-12 col-lg-2 col-form-label" for="hero-attack">Attaque</label>
 						<div class="col-md-12 col-lg-8">
@@ -39,7 +39,7 @@
 						<span class="col-md-12 col-lg-2">{{hero.attack}}</span>
 					</div>
 
-					<!-- Dodge -->
+					&lt;!&ndash; Dodge &ndash;&gt;
 					<div class="row mb-3">
 						<label class="col-md-12 col-lg-2 col-form-label" for="hero-dodge">Esquive</label>
 						<div class="col-md-12 col-lg-8">
@@ -48,7 +48,7 @@
 						<span class="col-md-12 col-lg-2">{{hero.dodge}}</span>
 					</div>
 
-					<!-- Power -->
+					&lt;!&ndash; Power &ndash;&gt;
 					<div class="row mb-3">
 						<label class="col-md-12 col-lg-2 col-form-label" for="hero-power">Puissance</label>
 						<div class="col-md-12 col-lg-8">
@@ -66,7 +66,8 @@
 						<button class="btn btn-info" (click)="balancePoints()">Équilibrer</button>
 					</div>
 				</div>
-			</div>
+			</div>-->
+			<app-skills [skills]="skills" [minValue]="1" [maxValue]="37" [mustBeEqualTo]="40"></app-skills>
 		</div>
 
 		<div class="row justify-content-center" role="group" aria-label="Basic example">
@@ -74,8 +75,5 @@
 			<button type="button" class="col-lg-3 col-md-4 col-sm-12 m-1 btn btn-success" (click)="save()">Sauvegarder</button>
 		</div>
 	</div>
-
-
-
 
 </div>

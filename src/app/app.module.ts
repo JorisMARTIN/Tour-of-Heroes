@@ -14,6 +14,7 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {ToastsContainer} from "./components/toast-global/toast-container.component";
 import {WeaponsComponent} from './components/weapons/weapons.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SkillsComponent } from './components/_utils/skills/skills.component';
 
 @NgModule({
 	declarations: [
@@ -23,7 +24,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 		DashboardComponent,
 		ToastsContainer,
 		WeaponsComponent,
-  		NavbarComponent
+  		NavbarComponent,
+    SkillsComponent
 	],
 	imports: [
 		BrowserModule,

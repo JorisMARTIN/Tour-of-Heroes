@@ -72,7 +72,7 @@ export class FirestoreService<T> implements IFirestoreService<T> {
 			await this.entityRef.doc(entity.id).update(entity);
 			this.toastService.showSuccess({
 				text: "Succès",
-				detail: "Votre entité a été sauvegardé avec succès !"
+				detail: "Votre entité a été sauvegardée avec succès !"
 			});
 		} catch (err) {
 			this.toastService.showDanger({

@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {FirestoreService} from "./firestore.service";
-import {IHero} from "../interfaces/hero.interface";
+import {FirestoreService} from "../firestore.service";
+import {IHero} from "../../interfaces/hero.interface";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {ToastService} from "./toast.service";
+import {ToastService} from "../toast.service";
 
 const COLLECTION_NAME = 'Heroes';
 

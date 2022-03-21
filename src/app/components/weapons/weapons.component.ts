@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {WeaponService} from "../../services/weapon.service";
+import {WeaponService} from "../../services/entity/weapon.service";
 
 @Component({
   selector: 'app-weapons',
@@ -8,7 +8,7 @@ import {WeaponService} from "../../services/weapon.service";
 })
 export class WeaponsComponent implements OnInit {
 
-  constructor(weaponService: WeaponService) { }
+  constructor(private weaponService: WeaponService) { }
 
   ngOnInit(): void {
   }
