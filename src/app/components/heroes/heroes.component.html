@@ -1,33 +1,44 @@
-<div class="container-fluid col-xs-12 col-md-6 m-auto">
+<div class="container-fluid col-xs-12 col-md-8 m-auto">
 	<h2 class="text-center">Héros</h2>
 	<div class="row">
 		<button type="button" class="mb-2 col-xs-12 col-md-4 btn btn-outline-success" (click)="open(heroModalTemplate)">Créer un héro</button>
 	</div>
 	<div class="row">
-		<ul class="list-group">
-			<li *ngFor="let hero of heroes$ | async"
-				id="hero-component-{{hero.id}}"
-				class="list-group-item"
-				(mouseenter)="setActive(hero.id, true)"
-				(mouseleave)="setActive(hero.id, false)"
-			>
-				<span>{{hero.name}}</span>
-				<div class="float-end btn-group" role="group" aria-label="Basic example">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th scope="col" sortable="name" (sort)="onSort($event)">Héro</th>
+				<th scope="col" sortable="attack" (sort)="onSort($event)">Attaque</th>
+				<th scope="col" sortable="power" (sort)="onSort($event)">Puissance</th>
+				<th scope="col" sortable="pv" (sort)="onSort($event)">Pv</th>
+				<th scope="col" sortable="dodge" (sort)="onSort($event)">Esquive</th>
+				<th scope="col">Actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr *ngFor="let hero of heroes">
+				<td>{{ hero.name }}</td>
+				<td>{{ hero.attack | number }}</td>
+				<td>{{ hero.power | number }}</td>
+				<td>{{ hero.pv | number }}</td>
+				<td>{{ hero.dodge | number }}</td>
+				<td>
 					<a class="btn btn-success" routerLink="/hero/{{hero.id}}" title="Éditer le héro">
 						<i class="bi bi-pencil"></i>
 					</a>
 					<button type="button" class="btn btn-danger" title="Supprimer le héro" (click)="deleteHero(hero)">
 						<i class="bi bi-trash"></i>
 					</button>
-				</div>
-			</li>
-		</ul>
+				</td>
+			</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<!-- Hero Modal -->
 	<ng-template #heroModalTemplate let-modal>
 		<div class="modal-header">
-			<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+			<h4 class="modal-title" id="modal-basic-title">Créer un héro</h4>
 			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
 		</div>
 		<div class="modal-body">

@@ -13,11 +13,10 @@ import {ISkills} from "../../interfaces/skills.interface";
 })
 export class HeroDetailComponent implements OnInit, OnDestroy {
 
-	GLOBAL_POINT: number = 40;
 	hero: IHero;
 	skills: ISkills;
 
-	private sub: Subscription | undefined;
+	private sub: Subscription;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -27,7 +26,6 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		this.getHero();
-
 	}
 
 	ngOnDestroy() {
@@ -55,42 +53,11 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 	}
 
 	save() {
-		if (this.hero) this.heroService.update(this.hero);
-	}
-
-
-	/**
-	 * Called to control the value of each abilities according to the available points
-	 *
-	 * @param e Input change event
-	 */
-	onStatChange(e: Event) {
-		const target = e.target as HTMLInputElement;
-		if (this.hero) {
-			const availablePoint = this.computeAvailablePoint(this.hero);
-			if (this.hero[target.name] < target.value && availablePoint == 0) {
-				target.value = this.hero[target.name];
-			} else {
-				const value = Number.parseInt(target.value);
-				if (availablePoint - (value - this.hero[target.name]) < 0) this.hero[target.name] += availablePoint;
-				else this.hero[target.name] = value;
-			}
+		this.hero = {
+			...this.hero,
+			...this.skills
 		}
-	}
-
-	balancePoints(): void {
-		if (this.hero) {
-			const value = this.GLOBAL_POINT / 4;
-			this.hero.pv = this.hero.attack = this.hero.power = this.hero.dodge = value;
-		}
-	}
-
-	/**
-	 *
-	 * @param hero HeroInterface to compute available point
-	 */
-	computeAvailablePoint(hero: IHero): number {
-		return this.GLOBAL_POINT - (hero.attack + hero.power + hero.pv + hero.dodge);
+		this.heroService.update(this.hero);
 	}
 
 }

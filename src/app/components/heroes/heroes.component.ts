@@ -1,20 +1,45 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, QueryList, TemplateRef, ViewChildren} from '@angular/core';
 import {IHero} from "../../interfaces/hero.interface";
 import {HeroService} from "../../services/entity/hero.service";
-import {Observable, of} from "rxjs";
+import {Subscription} from "rxjs";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
+import {compare, NgbdSortableHeader, SortEvent} from "../../directives/sortable/sortable.directive";
 
 @Component({
 	selector: 'app-heroes',
 	templateUrl: './heroes.component.html',
 	styleUrls: ['./heroes.component.scss']
 })
-export class HeroesComponent implements OnInit {
+export class HeroesComponent implements OnInit, OnDestroy {
 
-	heroes$: Observable<IHero[]> = of([]);
+	sub: Subscription;
+	heroes: IHero[];
+	HEROES: IHero[];
 
 	newHeroName: string = "";
+
+	@ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
+
+	onSort({column, direction}: SortEvent) {
+
+		// resetting other headers
+		this.headers.forEach(header => {
+			if (header.sortable !== column) {
+				header.direction = '';
+			}
+		});
+
+		// sorting
+		if (direction === '' || column === '') {
+			this.heroes = this.HEROES;
+		} else {
+			this.heroes = [...this.HEROES].sort((a, b) => {
+				const res = compare(a[column], b[column]);
+				return direction === 'asc' ? res : -res;
+			});
+		}
+	}
 
 	constructor(
 		private heroService: HeroService,
@@ -49,8 +74,15 @@ export class HeroesComponent implements OnInit {
 		this.getHeroes();
 	}
 
+	ngOnDestroy() {
+		this.sub.unsubscribe();
+	}
+
 	getHeroes(): void {
-		this.heroes$ = this.heroService.getAll();
+		this.sub = this.heroService.getAll().subscribe(heroes => {
+			this.heroes = heroes;
+			this.HEROES = heroes;
+		});
 	}
 
 	setActive(heroId: string, isActive: boolean): void {

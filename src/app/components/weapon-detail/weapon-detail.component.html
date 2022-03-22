@@ -1,0 +1,31 @@
+<div *ngIf="weapon">
+
+	<h2><b>Héro :</b> {{weapon.name | uppercase}}</h2>
+
+	<div class="container col-md-6 col-xs-12 justify-content-center">
+		<div class="mb-3 row">
+			<label class="col-sm-2 col-form-label" for="weapon-id">Id :</label>
+			<div class="col-sm-10">
+				<input id="weapon-id" class="form-control-plaintext" type="text" value="{{weapon.id}}" aria-label="HeroInterface id" readonly>
+			</div>
+		</div>
+
+		<div class="mb-4 row">
+			<label class="col-sm-2 col-form-label" for="weapon-name">Nom</label>
+			<div class="col-sm-10">
+				<input id="weapon-name" class="form-control" type="text" name="name" [(ngModel)]="weapon.name">
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<h3>Caractéristiques</h3>
+			<app-skills [skills]="skills" [minValue]="-5" [maxValue]="5" [mustBeEqualTo]="0"></app-skills>
+		</div>
+
+		<div class="row justify-content-center" role="group" aria-label="Basic example">
+			<button type="button" class="col-lg-3 col-md-4 col-sm-12 m-1 btn btn-danger" (click)="goBack()">Retour</button>
+			<button type="button" class="col-lg-3 col-md-4 col-sm-12 m-1 btn btn-success" (click)="save()">Sauvegarder</button>
+		</div>
+	</div>
+
+</div>

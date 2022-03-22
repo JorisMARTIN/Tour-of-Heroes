@@ -1,1 +1,56 @@
-<p>weapons works!</p>
+<div class="container-fluid col-xs-12 col-md-8 m-auto">
+	<h2 class="text-center">Armes</h2>
+	<div class="row">
+		<button type="button" class="mb-2 col-xs-12 col-md-4 btn btn-outline-success"
+				(click)="open(weaponModalTemplate)">Créer une arme
+		</button>
+	</div>
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th scope="col" sortable="name" (sort)="onSort($event)">Arme</th>
+				<th scope="col" sortable="attack" (sort)="onSort($event)">Attaque</th>
+				<th scope="col" sortable="power" (sort)="onSort($event)">Puissance</th>
+				<th scope="col" sortable="pv" (sort)="onSort($event)">Pv</th>
+				<th scope="col" sortable="dodge" (sort)="onSort($event)">Esquive</th>
+				<th scope="col">Actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr *ngFor="let weapon of weapons">
+				<td>{{ weapon.name }}</td>
+				<td>{{ weapon.attack | number }}</td>
+				<td>{{ weapon.power | number }}</td>
+				<td>{{ weapon.pv | number }}</td>
+				<td>{{ weapon.dodge | number }}</td>
+				<td>
+					<a class="btn btn-success" routerLink="/weapon/{{weapon.id}}" title="Éditer l'arme">
+						<i class="bi bi-pencil"></i>
+					</a>
+					<button type="button" class="btn btn-danger" title="Supprimer l'arme" (click)="deleteWeapon(weapon)">
+						<i class="bi bi-trash"></i>
+					</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Weapon Modal -->
+	<ng-template #weaponModalTemplate let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-basic-title">Créer une arme</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+		</div>
+		<div class="modal-body">
+			<label for="newWeapon-name" class="form-label">Nom de l'arme</label>
+			<input id="newWeapon-name" type="text" class="form-control" [(ngModel)]="newWeaponName" required>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-danger" (click)="modal.close()">Annuler</button>
+			<button type="button" class="btn btn-outline-success" (click)="modal.close('save')">Sauvegarder</button>
+		</div>
+	</ng-template>
+</div>
+

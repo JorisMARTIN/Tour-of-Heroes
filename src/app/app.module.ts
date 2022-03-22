@@ -13,9 +13,10 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {ToastsContainer} from "./components/toast-global/toast-container.component";
 import {WeaponsComponent} from './components/weapons/weapons.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SkillsComponent } from './components/_utils/skills/skills.component';
-
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {SkillsComponent} from './components/_utils/skills/skills.component';
+import {NgbdSortableHeader} from './directives/sortable/sortable.directive';
+import { WeaponDetailComponent } from './components/weapon-detail/weapon-detail.component'
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -24,8 +25,10 @@ import { SkillsComponent } from './components/_utils/skills/skills.component';
 		DashboardComponent,
 		ToastsContainer,
 		WeaponsComponent,
-  		NavbarComponent,
-    SkillsComponent
+		NavbarComponent,
+		SkillsComponent,
+		NgbdSortableHeader,
+  WeaponDetailComponent
 	],
 	imports: [
 		BrowserModule,

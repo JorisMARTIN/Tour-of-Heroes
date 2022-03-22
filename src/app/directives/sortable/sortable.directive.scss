@@ -1,0 +1,13 @@
+th[sortable] {
+
+	cursor: pointer;
+
+	&.desc::after {
+		content: '\F148';
+		font-family: 'bootstrap-icons';
+	}
+	&.asc::after {
+		content: '\F128';
+		font-family: 'bootstrap-icons';
+	}
+}

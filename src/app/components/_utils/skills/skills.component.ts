@@ -36,7 +36,7 @@ export class SkillsComponent implements OnInit {
 			target.value = skillsCopy[target.name]
 		}
 
-		this.skills = skillsCopy;
+		this.skills[target.name] = skillsCopy[target.name];
 	}
 
 	balancePoints(): void {
