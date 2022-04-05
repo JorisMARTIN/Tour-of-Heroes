@@ -1,4 +1,4 @@
-<div *ngIf="hero">
+<div *ngIf="hero && weapons">
 
 	<h2><b>Héro :</b> {{hero.name | uppercase}}</h2>
 
@@ -19,55 +19,17 @@
 
 		<div class="mb-3">
 			<h3>Caractéristiques</h3>
-			<!--<div class="row mb-3 p-4">
-				<div class="col-md-12 col-lg-10">
-					&lt;!&ndash; PV &ndash;&gt;
-					<div class="row mb-3">
-						<label class="col-md-12 col-lg-2 col-form-label" for="hero-pv">PV</label>
-						<div class="col-md-12 col-lg-8">
-							<input id="hero-pv" type="range" class="form-range" name="pv" min="1" max="{{GLOBAL_POINT - 3}}" step="1" value="{{hero.pv}}" (change)="onStatChange($event)">
-						</div>
-						<span class="col-md-12 col-lg-2">{{hero.pv}}</span>
-					</div>
+			<app-skills [skills]="skills" [minValue]="1" [maxValue]="37" [mustBeEqualTo]="40" [weapon]="getHeroWeapon()"></app-skills>
+		</div>
 
-					&lt;!&ndash; Attack &ndash;&gt;
-					<div class="row mb-3">
-						<label class="col-md-12 col-lg-2 col-form-label" for="hero-attack">Attaque</label>
-						<div class="col-md-12 col-lg-8">
-							<input id="hero-attack" type="range" class="form-range" name="attack" min="1" max="{{GLOBAL_POINT - 3}}" step="1" value="{{hero.attack}}" (change)="onStatChange($event)">
-						</div>
-						<span class="col-md-12 col-lg-2">{{hero.attack}}</span>
-					</div>
+		<div class="mb-3">
+			<h3>Arme</h3>
+			<select class="form-select mb-3" aria-label="Weapons select" (change)="onWeaponChange($event)">
+				<option *ngIf="!hero.weaponId" selected>Choisir une arme ...</option>
+				<option *ngFor="let weapon of weapons" [value]="weapon.id" [selected]="hero.weaponId === weapon.id">{{weapon.name}}</option>
+			</select>
 
-					&lt;!&ndash; Dodge &ndash;&gt;
-					<div class="row mb-3">
-						<label class="col-md-12 col-lg-2 col-form-label" for="hero-dodge">Esquive</label>
-						<div class="col-md-12 col-lg-8">
-							<input id="hero-dodge" type="range" class="form-range" name="dodge" min="1" max="{{GLOBAL_POINT - 3}}" step="1" value="{{hero.dodge}}" (change)="onStatChange($event)">
-						</div>
-						<span class="col-md-12 col-lg-2">{{hero.dodge}}</span>
-					</div>
-
-					&lt;!&ndash; Power &ndash;&gt;
-					<div class="row mb-3">
-						<label class="col-md-12 col-lg-2 col-form-label" for="hero-power">Puissance</label>
-						<div class="col-md-12 col-lg-8">
-							<input id="hero-power" type="range" class="form-range" name="power" min="1" max="{{GLOBAL_POINT - 3}}" step="1" value="{{hero.power}}" (change)="onStatChange($event)">
-						</div>
-						<span class="col-md-12 col-lg-2">{{hero.power}}</span>
-					</div>
-
-				</div>
-				<div class="col-md-12 col-lg-2 text-center">
-					<div class="row">
-						<h4>Points disponibles <span class="badge {{computeAvailablePoint(hero) == 0 ? 'bg-danger' : 'bg-primary'}}">{{computeAvailablePoint(hero)}}</span></h4>
-					</div>
-					<div class="row">
-						<button class="btn btn-info" (click)="balancePoints()">Équilibrer</button>
-					</div>
-				</div>
-			</div>-->
-			<app-skills [skills]="skills" [minValue]="1" [maxValue]="37" [mustBeEqualTo]="40"></app-skills>
+			<button *ngIf="hero.weaponId" class="btn btn-outline-danger" (click)="removeWeapon()">Retirer l'arme</button>
 		</div>
 
 		<div class="row justify-content-center" role="group" aria-label="Basic example">

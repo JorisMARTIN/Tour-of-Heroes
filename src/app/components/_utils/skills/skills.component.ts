@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ISkills} from "../../../interfaces/skills.interface";
+import {IWeapon} from "../../../interfaces/weapon.interface";
 
 @Component({
 	selector: 'app-skills',
@@ -12,6 +13,8 @@ export class SkillsComponent implements OnInit {
 	@Input() minValue: number;
 	@Input() maxValue: number;
 	@Input() skills: ISkills;
+	
+	@Input() weapon?: IWeapon;
 
 	constructor() {
 	}

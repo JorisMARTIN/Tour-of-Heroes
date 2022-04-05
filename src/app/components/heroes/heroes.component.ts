@@ -45,8 +45,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
 		private heroService: HeroService,
 		private modalService: NgbModal,
 		private router: Router
-	) {
-	}
+	) {}
 
 	open(content: TemplateRef<any>) {
 		this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

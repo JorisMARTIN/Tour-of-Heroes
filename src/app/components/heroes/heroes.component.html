@@ -12,6 +12,7 @@
 				<th scope="col" sortable="power" (sort)="onSort($event)">Puissance</th>
 				<th scope="col" sortable="pv" (sort)="onSort($event)">Pv</th>
 				<th scope="col" sortable="dodge" (sort)="onSort($event)">Esquive</th>
+				<th scope="col">Armé</th>
 				<th scope="col">Actions</th>
 			</tr>
 			</thead>
@@ -22,6 +23,7 @@
 				<td>{{ hero.power | number }}</td>
 				<td>{{ hero.pv | number }}</td>
 				<td>{{ hero.dodge | number }}</td>
+				<td><i class="bi bi-{{ hero.weaponId ? 'check' : 'x'}}-lg"></i></td>
 				<td>
 					<a class="btn btn-success" routerLink="/hero/{{hero.id}}" title="Éditer le héro">
 						<i class="bi bi-pencil"></i>
