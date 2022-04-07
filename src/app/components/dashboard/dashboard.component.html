@@ -1,6 +1,13 @@
 <h2>Top Heroes</h2>
-<div class="heroes-menu row">
+<div class="menu-row row">
   <a class="btn btn-primary col-sm-12 col-md-4 col-lg-2" *ngFor="let hero of heroes" routerLink="/hero/{{hero.id}}">
     {{hero.name}}
   </a>
+</div>
+
+<h2>Top Armes</h2>
+<div class="menu-row row">
+	<a class="btn btn-secondary col-sm-12 col-md-4 col-lg-2" *ngFor="let weapon of weapons" routerLink="/weapon/{{weapon.id}}">
+		{{weapon.name}}
+	</a>
 </div>
