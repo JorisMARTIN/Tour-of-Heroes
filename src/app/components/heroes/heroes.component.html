@@ -7,6 +7,7 @@
 		<table class="table table-striped">
 			<thead>
 			<tr>
+				<th scope="col">#</th>
 				<th scope="col" sortable="name" (sort)="onSort($event)">Héro</th>
 				<th scope="col" sortable="attack" (sort)="onSort($event)">Attaque</th>
 				<th scope="col" sortable="power" (sort)="onSort($event)">Puissance</th>
@@ -18,6 +19,9 @@
 			</thead>
 			<tbody>
 			<tr *ngFor="let hero of heroes">
+				<th>
+					<img *ngIf="hero.image" src="{{hero.image}}" alt="Hero image" width="40px">
+				</th>
 				<td>{{ hero.name }}</td>
 				<td>{{ hero.attack | number }}</td>
 				<td>{{ hero.power | number }}</td>

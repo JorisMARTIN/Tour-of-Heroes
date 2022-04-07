@@ -1,0 +1,21 @@
+<div class="image-select">
+	<img *ngIf="elem.image" src="{{elem.image}}" alt="Selected image"/>
+	<button type="button" class="mb-2 col-xs-12 col-md-4 btn btn-outline-success" (click)="open(imageSelectModal)">{{elem.image ? 'Modifier l\'image' : 'Choisir une image'}}</button>
+</div>
+
+<!-- Image select Modal -->
+<ng-template #imageSelectModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Choisir une image</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+	</div>
+	<div class="modal-body">
+		<div class="images-choices">
+			<img *ngFor="let image of choices" src="{{image}}" alt="Image {{image}}" (click)="modal.close(image)">
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-danger" (click)="modal.close()">Annuler</button>
+		<button type="button" class="btn btn-outline-success" (click)="modal.close('save')">Sauvegarder</button>
+	</div>
+</ng-template>

@@ -1,0 +1,25 @@
+.image-select {
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+
+	img {
+		margin-bottom: 0.5em;
+		width: 100px;
+	}
+}
+
+.images-choices {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+
+	img {
+		background: white;
+		padding: 0.2em;
+		width: 100px;
+		margin: 0.5em;
+		cursor: pointer;
+	}
+}

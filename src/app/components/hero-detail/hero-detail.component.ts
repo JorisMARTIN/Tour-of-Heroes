@@ -7,6 +7,8 @@ import {Subscription} from "rxjs";
 import {ISkills} from "../../interfaces/skills.interface";
 import {WeaponService} from "../../services/entity/weapon.service";
 import {IWeapon} from "../../interfaces/weapon.interface";
+import {ToastService} from "../../services/toast.service";
+import {ImagesEnum} from "../../enums/images.enum";
 
 @Component({
 	selector: 'app-hero-detail',
@@ -16,9 +18,12 @@ import {IWeapon} from "../../interfaces/weapon.interface";
 export class HeroDetailComponent implements OnInit, OnDestroy {
 
 	hero: IHero;
+	image: string;
 	skills: ISkills;
 
 	weapons: IWeapon[];
+
+	images = ImagesEnum;
 
 	private sub: Subscription;
 	private wSubscription: Subscription;
@@ -27,6 +32,7 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute,
 		private heroService: HeroService,
 		private weaponService: WeaponService,
+		private toastService: ToastService,
 		private location: Location
 	) {}
 
@@ -62,6 +68,11 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 
 	getHeroWeapon(): IWeapon | undefined {
 		return this.weapons.find(weapon => weapon.id === this.hero.weaponId);
+	}
+
+	onImageChange(img: string) {
+		console.log(this.hero)
+		this.hero.image = img;
 	}
 
 	onWeaponChange(event: Event): void {

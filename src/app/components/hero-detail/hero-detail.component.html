@@ -3,17 +3,26 @@
 	<h2><b>Héro :</b> {{hero.name | uppercase}}</h2>
 
 	<div class="container col-md-6 col-xs-12 justify-content-center">
-		<div class="mb-3 row">
-			<label class="col-sm-2 col-form-label" for="hero-id">Id :</label>
-			<div class="col-sm-10">
-				<input id="hero-id" class="form-control-plaintext" type="text" value="{{hero.id}}" aria-label="HeroInterface id" readonly>
-			</div>
-		</div>
+		<div class="row mb-3 align-items-center">
+			<div class="col-6">
+				<div class="mb-3 row">
+					<label class="col-sm-2 col-form-label" for="hero-id">Id :</label>
+					<div class="col-sm-10">
+						<input id="hero-id" class="form-control-plaintext" type="text" value="{{hero.id}}" aria-label="HeroInterface id" readonly>
+					</div>
+				</div>
 
-		<div class="mb-4 row">
-			<label class="col-sm-2 col-form-label" for="hero-name">Nom</label>
-			<div class="col-sm-10">
-				<input id="hero-name" class="form-control" type="text" name="name" [(ngModel)]="hero.name">
+				<div class="mb-4 row">
+					<label class="col-sm-2 col-form-label" for="hero-name">Nom</label>
+					<div class="col-sm-10">
+						<input id="hero-name" class="form-control" type="text" name="name" [(ngModel)]="hero.name">
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="hero-image">
+					<image-select [choices]="images" [elem]="hero"></image-select>
+				</div>
 			</div>
 		</div>
 
