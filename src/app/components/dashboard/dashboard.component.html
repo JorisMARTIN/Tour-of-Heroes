@@ -1,13 +1,38 @@
-<h2>Top Heroes</h2>
-<div class="menu-row row">
-  <a class="btn btn-primary col-sm-12 col-md-4 col-lg-2" *ngFor="let hero of heroes" routerLink="/hero/{{hero.id}}">
-    {{hero.name}}
-  </a>
-</div>
+<div *ngIf="heroes && weapons">
+	<h2>Top Héros</h2>
+	<div class="menu-row row mb-3">
+		<div class="card" *ngFor="let hero of heroes">
+			<h3>{{heroes.indexOf(hero) + 1}}</h3>
+			<img src="{{hero.image || 'assets/img/altPicture.png'}}" class="card-img-top" alt="{{hero.name}} image">
+			<div class="card-body">
+				<h5 class="card-title">{{hero.name}}</h5>
+				<ul class="list-group">
+					<li class="list-group-item">Arme: {{hero.weaponId ? getWeaponValue(hero.weaponId, 'name') : 'Pas d\'arme équipée'}}</li>
+					<li class="list-group-item">Attaque: {{hero.attack}} <app-skill-span *ngIf="hero.weaponId" [value]="getWeaponValue(hero.weaponId, 'attack')"></app-skill-span></li>
+					<li class="list-group-item">Puissance: {{hero.power}} <app-skill-span *ngIf="hero.weaponId" [value]="getWeaponValue(hero.weaponId, 'power')"></app-skill-span></li>
+					<li class="list-group-item">PV: {{hero.pv}} <app-skill-span *ngIf="hero.weaponId" [value]="getWeaponValue(hero.weaponId, 'pv')"></app-skill-span></li>
+					<li class="list-group-item">Esquive: {{hero.dodge}} <app-skill-span *ngIf="hero.weaponId" [value]="getWeaponValue(hero.weaponId, 'dodge')"></app-skill-span></li>
+				</ul>
+				<a routerLink="/hero/{{hero.id}}" class="btn btn-primary">Détails</a>
+			</div>
+		</div>
+	</div>
 
-<h2>Top Armes</h2>
-<div class="menu-row row">
-	<a class="btn btn-secondary col-sm-12 col-md-4 col-lg-2" *ngFor="let weapon of weapons" routerLink="/weapon/{{weapon.id}}">
-		{{weapon.name}}
-	</a>
+	<h2>Armes les plus utilisées</h2>
+	<div class="menu-row row">
+		<div class="card" *ngFor="let weapon of weapons">
+			<h3>{{weapons.indexOf(weapon) + 1}}</h3>
+			<div class="card-body">
+				<h5 class="card-title">{{weapon.name}}</h5>
+				<p>Nombre d'utilisation: {{mostUsedWeapons[weapon.id]}}</p>
+				<ul class="list-group">
+					<li class="list-group-item">Attaque: <app-skill-span [value]="weapon.attack"></app-skill-span></li>
+					<li class="list-group-item">Puissance: <app-skill-span [value]="weapon.power"></app-skill-span></li>
+					<li class="list-group-item">PV: <app-skill-span [value]="weapon.pv"></app-skill-span></li>
+					<li class="list-group-item">Esquive: <app-skill-span [value]="weapon.dodge"></app-skill-span></li>
+				</ul>
+				<a routerLink="/weapon/{{weapon.id}}" class="btn btn-primary">Détails</a>
+			</div>
+		</div>
+	</div>
 </div>

@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IHero} from '../../interfaces/hero.interface';
 import {HeroService} from '../../services/entity/hero.service';
 import {WeaponService} from "../../services/entity/weapon.service";
 import {IWeapon} from "../../interfaces/weapon.interface";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -10,11 +11,16 @@ import {IWeapon} from "../../interfaces/weapon.interface";
 	templateUrl: './dashboard.component.html',
 	styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
 	TOP_NUMBER: number = 5;
-	heroes: IHero[] = [];
-	weapons: IWeapon[] = [];
+	heroes: IHero[];
+	weapons: IWeapon[];
+
+	mostUsedWeapons: {[weaponId: string]: number};
+
+	heroSub: Subscription;
+	weaponSub: Subscription;
 
 	constructor(
 		private heroService: HeroService,
@@ -22,17 +28,32 @@ export class DashboardComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.getHeroes();
-		this.getWeapons();
+		this.heroSub = this.getHeroes();
+		this.weaponSub = this.getWeapons();
 	}
 
-	getHeroes(): void {
-		this.heroService.getAll()
-			.subscribe(heroes => this.heroes = heroes.slice(0, this.TOP_NUMBER - 1));
+	ngOnDestroy() {
+		this.heroSub.unsubscribe();
+		this.weaponSub.unsubscribe();
 	}
 
-	getWeapons(): void {
-		this.weaponService.getAll()
-			.subscribe(weapon => this.weapons = weapon.slice(0, this.TOP_NUMBER - 1));
+	getHeroes(): Subscription {
+		return this.heroService.getAll()
+			.subscribe(heroes => this.heroes = heroes.slice(0, this.TOP_NUMBER));
+	}
+
+	getWeapons(): Subscription {
+		return this.weaponService.getAll()
+			.subscribe(weapon => {
+				this.weaponService.getMostUsedWeapon().then((res) => {
+					this.mostUsedWeapons = res;
+					this.weapons = weapon.sort((a, b) => res[b.id] - res[a.id])
+				})
+			});
+	}
+
+	getWeaponValue(weaponId: string, key: string): number {
+		const weapon = this.weapons.find((weapon) => weapon.id === weaponId) as IWeapon;
+		return weapon[key];
 	}
 }

@@ -10,7 +10,7 @@ import {IFirestoreService} from "../interfaces/firestore.interface";
 export class FirestoreService<T> implements IFirestoreService<T> {
 
 	// La collection firestore
-	private entityRef: AngularFirestoreCollection<any>;
+	protected entityRef: AngularFirestoreCollection<any>;
 	// L'ensemble des entités
 	entities$: Observable<any[]>;
 

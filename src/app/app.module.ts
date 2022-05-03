@@ -17,7 +17,8 @@ import {NavbarComponent} from './components/navbar/navbar.component';
 import {SkillsComponent} from './components/_utils/skills/skills.component';
 import {NgbdSortableHeader} from './directives/sortable/sortable.directive';
 import { WeaponDetailComponent } from './components/weapon-detail/weapon-detail.component';
-import { ImageSelectComponent } from './components/_utils/image-select/image-select.component'
+import { ImageSelectComponent } from './components/_utils/image-select/image-select.component';
+import { SkillSpanComponent } from './components/_utils/skill-span/skill-span.component'
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -30,7 +31,8 @@ import { ImageSelectComponent } from './components/_utils/image-select/image-sel
 		SkillsComponent,
 		NgbdSortableHeader,
   WeaponDetailComponent,
-  ImageSelectComponent
+  ImageSelectComponent,
+  SkillSpanComponent
 	],
 	imports: [
 		BrowserModule,

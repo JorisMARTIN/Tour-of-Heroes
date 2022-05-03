@@ -1,6 +1,19 @@
 .menu-row {
 	justify-content: center;
-	a {
-		margin: 0.5em;
+
+	.card {
+		width: 300px;
+		margin: 5px;
+
+		img {
+			padding: 5px;
+			width: 100%;
+			height: 100px;
+			object-fit: contain;
+		}
+
+		span {
+			color: darkgray;
+		}
 	}
 }

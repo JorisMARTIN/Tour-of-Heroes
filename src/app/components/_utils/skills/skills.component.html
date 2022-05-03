@@ -6,7 +6,7 @@
 			<div class="col-md-12 col-lg-8">
 				<input id="hero-pv" type="range" class="form-range" name="pv" min="{{minValue}}" max="{{maxValue}}" step="1" value="{{skills.pv}}" (change)="onStatChange($event)">
 			</div>
-			<span class="col-md-12 col-lg-2">{{skills.pv}}</span><span *ngIf="weapon" [style]="weapon.pv > 0 ? 'color: lightgreen' : 'color: red'">({{weapon.pv > 0 ? '+' : ''}}{{weapon.pv}})</span>
+			<span class="col-md-12 col-lg-2">{{skills.pv}}</span><app-skill-span *ngIf="weapon" [value]="weapon.pv"></app-skill-span>
 		</div>
 
 		<!-- Attack -->
@@ -15,7 +15,7 @@
 			<div class="col-md-12 col-lg-8">
 				<input id="hero-attack" type="range" class="form-range" name="attack" min="{{minValue}}" max="{{maxValue}}" step="1" value="{{skills.attack}}" (change)="onStatChange($event)">
 			</div>
-			<span class="col-md-12 col-lg-2">{{skills.attack}}</span><span *ngIf="weapon" [style]="weapon.attack > 0 ? 'color: lightgreen' : 'color: red'">({{weapon.attack > 0 ? '+' : ''}}{{weapon.attack}})</span>
+			<span class="col-md-12 col-lg-2">{{skills.attack}}</span><app-skill-span *ngIf="weapon" [value]="weapon.attack"></app-skill-span>
 		</div>
 
 		<!-- Dodge -->
@@ -24,7 +24,7 @@
 			<div class="col-md-12 col-lg-8">
 				<input id="hero-dodge" type="range" class="form-range" name="dodge" min="{{minValue}}" max="{{maxValue}}" step="1" value="{{skills.dodge}}" (change)="onStatChange($event)">
 			</div>
-			<span class="col-md-12 col-lg-2">{{skills.dodge}}</span><span *ngIf="weapon" [style]="weapon.dodge > 0 ? 'color: lightgreen' : 'color: red'">({{weapon.dodge > 0 ? '+' : ''}}{{weapon.dodge}})</span>
+			<span class="col-md-12 col-lg-2">{{skills.dodge}}</span><app-skill-span *ngIf="weapon" [value]="weapon.dodge"></app-skill-span>
 		</div>
 
 		<!-- Power -->
@@ -33,7 +33,7 @@
 			<div class="col-md-12 col-lg-8">
 				<input id="hero-power" type="range" class="form-range" name="power" min="{{minValue}}" max="{{maxValue}}" step="1" value="{{skills.power}}" (change)="onStatChange($event)">
 			</div>
-			<span class="col-md-12 col-lg-2">{{skills.power}}</span><span *ngIf="weapon" [style]="weapon.power > 0 ? 'color: lightgreen' : 'color: red'">({{weapon.power > 0 ? '+' : ''}}{{weapon.power}})</span>
+			<span class="col-md-12 col-lg-2">{{skills.power}}</span><app-skill-span *ngIf="weapon" [value]="weapon.power"></app-skill-span>
 		</div>
 
 	</div>
