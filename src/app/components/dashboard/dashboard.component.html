@@ -22,6 +22,7 @@
 	<div class="menu-row row">
 		<div class="card" *ngFor="let weapon of weapons">
 			<h3>{{weapons.indexOf(weapon) + 1}}</h3>
+			<img src="{{weapon.image || 'assets/img/altPicture.png'}}" class="card-img-top" alt="{{weapon.name}} image">
 			<div class="card-body">
 				<h5 class="card-title">{{weapon.name}}</h5>
 				<p>Nombre d'utilisation: {{mostUsedWeapons[weapon.id]}}</p>
