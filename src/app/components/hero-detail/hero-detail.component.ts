@@ -70,10 +70,6 @@ export class HeroDetailComponent implements OnInit, OnDestroy {
 		return this.weapons.find(weapon => weapon.id === this.hero.weaponId);
 	}
 
-	onImageChange(img: string) {
-		console.log(this.hero)
-		this.hero.image = img;
-	}
 
 	onWeaponChange(event: Event): void {
 		this.hero.weaponId = (event.target as HTMLSelectElement).value;

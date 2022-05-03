@@ -1,5 +1,10 @@
 <div class="image-select">
-	<img *ngIf="elem.image" src="{{elem.image}}" alt="Selected image"/>
+	<div *ngIf="elem.image" class="image-container">
+		<img src="{{elem.image}}" alt="Selected image"/>
+		<div class="delete-image-button">
+			<i class="bi bi-x-lg" title="Supprimer l'image" (click)="deleteImage()"></i>
+		</div>
+	</div>
 	<button type="button" class="mb-2 col-xs-12 col-md-4 btn btn-outline-success" (click)="open(imageSelectModal)">{{elem.image ? 'Modifier l\'image' : 'Choisir une image'}}</button>
 </div>
 

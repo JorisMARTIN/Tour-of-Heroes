@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {WeaponService} from "../../services/entity/weapon.service";
+import {WeaponImagesEnum} from "../../enums/weaponImages.enum";
 
 @Component({
 	selector: 'app-weapon-detail',
@@ -15,6 +16,8 @@ export class WeaponDetailComponent implements OnInit, OnDestroy {
 
 	weapon: IWeapon;
 	skills: ISkills;
+
+	images = WeaponImagesEnum;
 
 	sub: Subscription;
 

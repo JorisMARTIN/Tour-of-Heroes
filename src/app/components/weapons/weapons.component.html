@@ -13,6 +13,7 @@
 		<table class="table table-striped">
 			<thead>
 			<tr>
+				<th scope="col">#</th>
 				<th scope="col" sortable="name" direction="asc" (sort)="onSort($event)">Arme</th>
 				<th scope="col" sortable="attack" (sort)="onSort($event)">Attaque</th>
 				<th scope="col" sortable="power" (sort)="onSort($event)">Puissance</th>
@@ -23,6 +24,9 @@
 			</thead>
 			<tbody>
 			<tr *ngFor="let weapon of weapons">
+				<th>
+					<img *ngIf="weapon.image" src="{{weapon.image}}" alt="Weapon image" width="40px">
+				</th>
 				<td>{{ weapon.name }}</td>
 				<td>{{ weapon.attack | number }}</td>
 				<td>{{ weapon.power | number }}</td>
