@@ -3,12 +3,16 @@
 	<div class="row">
 		<button type="button" class="mb-2 col-xs-12 col-md-4 btn btn-outline-success" (click)="open(heroModalTemplate)">Créer un héro</button>
 	</div>
+	<div class="filter">
+		<label for="hero-name-filter" class="form-label">Filtre</label>
+		<input id="hero-name-filter" class="form-control" type="text" (keyup)="onFilterChange($event)">
+	</div>
 	<div class="row">
 		<table class="table table-striped">
 			<thead>
 			<tr>
 				<th scope="col">#</th>
-				<th scope="col" sortable="name" (sort)="onSort($event)">Héro</th>
+				<th scope="col" sortable="name" direction="asc" (sort)="onSort($event)">Héro</th>
 				<th scope="col" sortable="attack" (sort)="onSort($event)">Attaque</th>
 				<th scope="col" sortable="power" (sort)="onSort($event)">Puissance</th>
 				<th scope="col" sortable="pv" (sort)="onSort($event)">Pv</th>

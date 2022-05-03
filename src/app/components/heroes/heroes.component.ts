@@ -21,6 +21,13 @@ export class HeroesComponent implements OnInit, OnDestroy {
 
 	@ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
+	onFilterChange(event: Event) {
+		const target = (event.target as HTMLInputElement);
+
+		if (!target.value || target.value.length === 0) this.heroes = this.HEROES;
+		this.heroes = this.heroes.filter((hero) => hero.name.toLowerCase().includes(target.value.toLowerCase()));
+	}
+
 	onSort({column, direction}: SortEvent) {
 
 		// resetting other headers
@@ -31,10 +38,8 @@ export class HeroesComponent implements OnInit, OnDestroy {
 		});
 
 		// sorting
-		if (direction === '' || column === '') {
-			this.heroes = this.HEROES;
-		} else {
-			this.heroes = [...this.HEROES].sort((a, b) => {
+		if (!(direction === '' && column === '')) {
+			this.heroes = this.heroes.sort((a, b) => {
 				const res = compare(a[column], b[column]);
 				return direction === 'asc' ? res : -res;
 			});
@@ -79,20 +84,9 @@ export class HeroesComponent implements OnInit, OnDestroy {
 
 	getHeroes(): void {
 		this.sub = this.heroService.getAll().subscribe(heroes => {
-			this.heroes = heroes;
+			this.heroes = heroes.sort((a, b) => compare(a.name, b.name));
 			this.HEROES = heroes;
 		});
-	}
-
-	setActive(heroId: string, isActive: boolean): void {
-		const elem = document.getElementById('hero-component-' + heroId);
-		if (!elem) return;
-
-		if (isActive) {
-			elem.classList.add('active');
-		} else {
-			elem.classList.remove('active');
-		}
 	}
 
 	deleteHero(hero: IHero) {

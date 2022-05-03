@@ -27,6 +27,13 @@ export class WeaponsComponent implements OnInit, OnDestroy {
 
 	@ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
+	onFilterChange(event: Event) {
+		const target = (event.target as HTMLInputElement);
+
+		if (!target.value || target.value.length === 0) this.weapons = this.WEAPONS;
+		this.weapons = this.weapons.filter((hero) => hero.name.toLowerCase().includes(target.value.toLowerCase()));
+	}
+
 	onSort({column, direction}: SortEvent) {
 
 		// resetting other headers
@@ -37,10 +44,8 @@ export class WeaponsComponent implements OnInit, OnDestroy {
 		});
 
 		// sorting
-		if (direction === '' || column === '') {
-			this.weapons = this.WEAPONS;
-		} else {
-			this.weapons = [...this.WEAPONS].sort((a, b) => {
+		if (!(direction === '' && column === '')) {
+			this.weapons = this.weapons.sort((a, b) => {
 				const res = compare(a[column], b[column]);
 				return direction === 'asc' ? res : -res;
 			});
@@ -86,7 +91,7 @@ export class WeaponsComponent implements OnInit, OnDestroy {
 
 	getWeapons(): void {
 		this.sub = this.weaponService.getAll().subscribe(weapons => {
-			this.weapons = weapons;
+			this.weapons = weapons.sort((a, b) => compare(a.name, b.name));
 			this.WEAPONS = weapons;
 		});
 	}

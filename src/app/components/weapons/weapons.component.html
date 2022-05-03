@@ -5,11 +5,15 @@
 				(click)="open(weaponModalTemplate)">Créer une arme
 		</button>
 	</div>
+	<div class="filter">
+		<label for="weapon-name-filter" class="form-label">Filtre</label>
+		<input id="weapon-name-filter" class="form-control" type="text" (keyup)="onFilterChange($event)">
+	</div>
 	<div class="row">
 		<table class="table table-striped">
 			<thead>
 			<tr>
-				<th scope="col" sortable="name" (sort)="onSort($event)">Arme</th>
+				<th scope="col" sortable="name" direction="asc" (sort)="onSort($event)">Arme</th>
 				<th scope="col" sortable="attack" (sort)="onSort($event)">Attaque</th>
 				<th scope="col" sortable="power" (sort)="onSort($event)">Puissance</th>
 				<th scope="col" sortable="pv" (sort)="onSort($event)">Pv</th>
