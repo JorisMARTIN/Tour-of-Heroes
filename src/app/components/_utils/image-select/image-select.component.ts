@@ -28,7 +28,7 @@ export class ImageSelectComponent implements OnInit {
 	}
 
 	deleteImage(): void {
-		this.elem.image = undefined;
+		this.elem.image = null;
 	}
 
 }
