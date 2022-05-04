@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 			.subscribe(weapon => {
 				this.weaponService.getMostUsedWeapon().then((res) => {
 					this.mostUsedWeapons = res;
-					this.weapons = weapon.sort((a, b) => res[b.id] - res[a.id])
+					this.weapons = weapon.sort((a, b) => res[b.id] - res[a.id]).slice(0, this.TOP_NUMBER)
 				})
 			});
 	}
