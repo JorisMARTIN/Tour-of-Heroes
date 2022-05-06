@@ -1,3 +1,11 @@
+# Tour of Heroes
+
+Projet Angular réaliser dans le cadre du module INFO7 - Application client riche de la LP - MIAW.
+
+Application déployée à cette adresse : [http://www-etu-info.iut2.upmf-grenoble.fr/~martjori/INFO7/](http://www-etu-info.iut2.upmf-grenoble.fr/~martjori/INFO7/)
+
+Utilisation de [firebase](https://firebase.google.com/) pour le stockage des données. 
+
 # Projet
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.3.
